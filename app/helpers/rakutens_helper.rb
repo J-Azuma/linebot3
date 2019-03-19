@@ -1,0 +1,2 @@
+module RakutensHelper
+end
