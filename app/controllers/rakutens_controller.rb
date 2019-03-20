@@ -49,9 +49,9 @@ class RakutensController < ApplicationController
          "contents": 
           { "type": 'carousel',
             "contents":[   
-             make_part(items[0]),
-             make_part(items[1]),
-             make_part(items[2])
+             items.each do |items|
+              make_part(item)
+             end
           ]}
         }
     end
