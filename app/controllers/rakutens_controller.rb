@@ -14,7 +14,7 @@ class RakutensController < ApplicationController
          case event
          when Line::Bot::Event::Message
             case event.type
-            when Line::Bot::Event::MessageType:Text 
+            when Line::Bot::Event::MessageType::Text 
                 input = event.message['text']
                 message = search_and_create_message(input)
                 client_reply_message(event['replyToken'], message)
@@ -37,7 +37,7 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      RakutenWebService::Ichiba::Item.search(keyword: input, hits: 3, imageFlag: 1)
+      res = RakutenWebService::Ichiba::Item.search(keyword: input, hits: 3, imageFlag: 1)
       items = []
       items = res.map{|item| item}
       make_reply_content(items)
@@ -70,7 +70,7 @@ class RakutensController < ApplicationController
                     {"type": "text", "text": title, "wrap": true, "weight": "bold", "size": "lg"},
                     {"type": "box", "layouts": "baseline",
                      "contents": [ 
-                      {"text": price, "wrap": true, "weight": "bold", "flex": 0}
+                      {"type": "text", "text": price, "wrap": true, "weight": "bold", "flex": 0}
                       ]}
                    ]},
           "footer": {"type": "box", "layout": "vertical", "spacing": "sm",
