@@ -17,7 +17,7 @@ class RakutensController < ApplicationController
             when Line::Bot::Event::MessageType::Text 
                 input = event.message['text']
                 message = search_and_create_message(input)
-                client_reply_message(event['replyToken'], message)
+                client.reply_message(event['replyToken'], message)
             end
          end
         end
