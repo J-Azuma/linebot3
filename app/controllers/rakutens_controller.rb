@@ -63,22 +63,57 @@ class RakutensController < ApplicationController
         image = item['mediumImageUrls'].first 
         {
           "type": "bubble",
-          "hero": {"type": "image", "size": "full", "aspectRatio": "20:13", "aspectMode": "cover", "url": image 
-            },
-          "body": {"type": "box", "layout": "vertical", "spacing": "sm", 
-                   "contents":[
-                    {"type": "text", "text": title, "wrap": true, "weight": "bold", "size": "lg"},
-                    {"type": "box", "layouts": "baseline",
-                     "contents": [ 
-                      {"type": "text", "text": price, "wrap": true, "weight": "bold", "flex": 0}
-                      ]}
-                   ]},
-          "footer": {"type": "box", "layout": "vertical", "spacing": "sm",
-                     "contents": [
-                      {"type": "button", "style": "primary",
-                       "action":{"type": "uri", "label": "商品ページへ", "uri": url}
-                      }
-                     ]}
+          "hero": {
+            "type": "image",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "cover",
+            "url": image
+          },
+          "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": title,
+                "wrap": true,
+                "weight": "bold",
+                "size": "lg"
+              },
+              {
+                "type": "box",
+                "layout": "baseline",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": price,
+                    "wrap": true,
+                    "weight": "bold",
+                    #"size": "xl",
+                    "flex": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "button",
+                "style": "primary",
+                "action": {
+                  "type": "uri",
+                  "label": "商品ページへ",
+                  "uri": url
+                }
+              }
+            ]
+          }
         }
     end
 end
