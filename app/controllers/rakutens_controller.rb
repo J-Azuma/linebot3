@@ -37,8 +37,8 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
-      if items == nil
+      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1, hasReviewFlag: 1)
+      if items['count'] == 0
         return "#{input}では見つかりませんでした。"
       else
         item = items.sort_by{rand}[0,1].first
