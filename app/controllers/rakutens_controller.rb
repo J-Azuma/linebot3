@@ -43,7 +43,10 @@ class RakutensController < ApplicationController
         return "#{input}では見つかりませんでした。"
       else
         item = items.sort_by{rand}[0,1].first
-        make_reply_content(item)
+        return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
+                 make_reply_content(item) ,
+                {type: 'text', text: '良かったらお買い求めください！'}]
+        #make_reply_content(item)
       end
      end
 
@@ -51,7 +54,7 @@ class RakutensController < ApplicationController
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
-          { "type": 'carousel',
+          { "type": 'bubble',
             "contents":[   
               #ここはfor文ではダメなのか？試してみたらエラーは吐かなかったが作動しなかった.
               make_part(item)
