@@ -37,21 +37,25 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      res = RakutenWebService::Ichiba::Item.search(keyword: input, hits: 3, imageFlag: 1)
-      items = []
-      items = res.map{|item| item}
-      make_reply_content(items)
+      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      if items.count == 0
+        return "#{input}では見つかりませんでした。"
+      else
+        item = items.sort_by{rand}[0,1].first
+        make_reply_content(item)
+      end
+     end
+     
     end
 
-    def make_reply_content(items)
+    def make_reply_content(item)
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
           { "type": 'carousel',
             "contents":[   
-              make_part(items[0]),
-              make_part(items[1]),
-              make_part(items[2])
+              #ここはfor文ではダメなのか？試してみたらエラーは吐かなかったが作動しなかった.
+              make_part(item)
           ]}
         }
     end
