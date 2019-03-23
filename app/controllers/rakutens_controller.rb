@@ -38,7 +38,8 @@ class RakutensController < ApplicationController
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
       items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1, hasReviewFlag: 1)
-      if items.empty? 
+      #検索結果が0だったときの処理が分からない.エラーを返した時とそれ以外で条件分岐？
+      if items['count'] == 0
         return "#{input}では見つかりませんでした。"
       else
         item = items.sort_by{rand}[0,1].first
