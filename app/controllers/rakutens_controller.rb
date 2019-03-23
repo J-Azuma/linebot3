@@ -45,8 +45,6 @@ class RakutensController < ApplicationController
         make_reply_content(item)
       end
      end
-     
-    end
 
     def make_reply_content(item)
         {"type": 'flex',
