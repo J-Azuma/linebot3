@@ -16,8 +16,10 @@ class RakutensController < ApplicationController
             case event.type
             when Line::Bot::Event::MessageType::Text 
                 input = event.message['text']
-                message = search_and_create_message(input)
-                client.reply_message(event['replyToken'], message)
+                messages = [{type: 'text', text: '#{input}ですね!こちらはいかがですか？'},
+                            search_and_create_message(input),
+                            {type: 'text', text: 'よかったらお買い求めください！'}]
+                client.reply_message(event['replyToken'], messages)
             end
          end
         end
@@ -40,10 +42,10 @@ class RakutensController < ApplicationController
       items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1, hasReviewFlag: 1)
       #検索結果が0だったときの処理が分からない.エラーを返した時とそれ以外で条件分岐？
         item = items.sort_by{rand}[0,1].first
-        return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
-                 make_reply_content(item) ,
-                {type: 'text', text: '良かったらお買い求めください！'}]
-        #make_reply_content(item)
+        #return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
+                 #make_reply_content(item) ,
+                #{type: 'text', text: '良かったらお買い求めください！'}]
+        make_reply_content(item)
      end
 
     def make_reply_content(item)
