@@ -38,7 +38,7 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1, hasReviewFlag: 1)
+      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
       #検索結果が0だったときの処理が分からない.エラーを返した時とそれ以外で条件分岐？
         item = items.sort_by{rand}[0,1].first
         #return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
