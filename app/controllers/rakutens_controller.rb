@@ -16,9 +16,8 @@ class RakutensController < ApplicationController
             case event.type
             when Line::Bot::Event::MessageType::Text 
                 input = event.message['text']
-                messages = search_and_create_message(input)
-                            #{"type": "text", "text": 'よかったらお買い求めください！'"
-                client.reply_message(event['replyToken'], messages)
+                message = search_and_create_message(input)
+                client.reply_message(event['replyToken'], message)
             end
          end
         end
