@@ -40,9 +40,6 @@ class RakutensController < ApplicationController
       end
       items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
       item = items.sort_by{rand}[0,1].first
-        #return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
-                 #make_reply_content(item) ,
-                #{type: 'text', text: '良かったらお買い求めください！'}]
       make_reply_content(item)
      end
 
