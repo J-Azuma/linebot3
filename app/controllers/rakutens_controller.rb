@@ -39,7 +39,7 @@ class RakutensController < ApplicationController
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
       items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
-      item = items[rand(items.length)]
+      item = items.sample
         #return [{type: 'text', text: '#{input}ですね！' + "\n" + 'こんなものはいかがですか？'},
                  #make_reply_content(item) ,
                 #{type: 'text', text: '良かったらお買い求めください！'}]
