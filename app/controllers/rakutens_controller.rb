@@ -37,9 +37,7 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
-      items = []
-      items = res.map{|item| item}
+      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
       item = items.sample
       make_reply_content(item)
      end
