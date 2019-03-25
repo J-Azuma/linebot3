@@ -51,7 +51,7 @@ class RakutensController < ApplicationController
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
-          { "type": 'carousel',  #bubbleにしていたのが間違い
+          { "type": 'carousel',  #bubbleにしていたのが間違い?
             "contents": [
               make_part(item)
             ]
@@ -63,7 +63,7 @@ class RakutensController < ApplicationController
         title = item['itemName']
         price = item['itemPrice'].to_s + "円"
         url = item['itemUrl']
-        image = item['mediumImageUrls'].first 
+        image = item['smallImageUrls'].first 
         {
           "type": "bubble",
           "hero": {
