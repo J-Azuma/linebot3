@@ -40,7 +40,7 @@ class RakutensController < ApplicationController
       res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
       items = []
       items = res.map{|item| item}
-      item = items.sort_by{rand}[0,1].first
+      item = items.sample
       make_reply_content(item)
      end
 
