@@ -37,21 +37,18 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
-      items = []
-      items = res.map{|item| item}
-      make_reply_content(items)
+      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      item = items.sort_by{rand}[0,1].first
+      make_reply_content(item)
      end
 
     def make_reply_content(items)
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
-          { "type": 'carousel',
+          { "type": 'bubble',
             "contents": [
-              make_part(items[0]),
-              make_part(items[1]),
-              make_part(items[2])
+              make_part(item)
             ]
             }
         }
