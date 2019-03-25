@@ -48,7 +48,7 @@ class RakutensController < ApplicationController
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
-          { "type": 'bubble',
+          { "type": 'carousel',
             "contents": [
               make_part(item)
             ]
