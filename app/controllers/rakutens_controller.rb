@@ -37,7 +37,9 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      items = []
+      items = res.map{|item| item}
       item = items.sort_by{rand}[0,1].first
       make_reply_content(item)
      end
