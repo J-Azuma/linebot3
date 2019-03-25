@@ -37,7 +37,9 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      items = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      items = []
+      items = res.map{|item| item}
       item = items.sample
       make_reply_content(item)
      end
@@ -46,7 +48,7 @@ class RakutensController < ApplicationController
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
-          { "type": 'carousel',
+          { "type": 'carousel',  #bubbleにしていたのが間違い
             "contents": [
               make_part(item)
             ]
