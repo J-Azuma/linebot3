@@ -16,8 +16,10 @@ class RakutensController < ApplicationController
             case event.type
             when Line::Bot::Event::MessageType::Text 
                 input = event.message['text']
-                message = search_and_create_message(input)
-                client.reply_message(event['replyToken'], message)
+                messages = [{"type": "text", "text": "#{input}ですね！こちらはいかがですか？"},
+                            search_and_create_message(input),
+                            {"type": "text", "text": "よかったらお買い求めください！"}]
+                client.reply_message(event['replyToken'], messages)
             end
          end
         end
@@ -37,7 +39,8 @@ class RakutensController < ApplicationController
        c.application_id = ENV['RAKUTEN_APPID']
        c.affiliate_id = ENV['REKUTEN_AFID']   
       end
-      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1)
+      res = RakutenWebService::Ichiba::Item.search(keyword: input, imageFlag: 1) #このコードで配列が作成されるわけではない？
+      #空の配列を作成→rb.40で定義した変数から配列に要素を格納
       items = []
       items = res.map{|item| item}
       item = items.sample
