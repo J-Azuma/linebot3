@@ -48,11 +48,11 @@ class RakutensController < ApplicationController
          "altText": 'This is a Flex Message',
          "contents": 
           { "type": 'carousel',
-            "contents":
+            "contents": [
               make_part(items[0]),
               make_part(items[1]),
               make_part(items[2])
-
+            ]
             }
         }
     end
