@@ -42,7 +42,7 @@ class RakutensController < ApplicationController
       make_reply_content(item)
      end
 
-    def make_reply_content(items)
+    def make_reply_content(item)
         {"type": 'flex',
          "altText": 'This is a Flex Message',
          "contents": 
